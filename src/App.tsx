@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from '@layout/Header';
 import Footer from '@layout/Footer';
 import Home from './page/Home';
-import { auth } from '@config/firebase';
+import { auth } from '@config/Firebase';
 import Login from '@auth/Login';
 
 function App() {

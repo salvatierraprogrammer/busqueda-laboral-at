@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Button, TextField, Typography, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '@config/firebase';
+import { auth } from '@config/Firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
 function Login({ handleClose, handleOpenCrearCuenta, setIsAuthenticated }) {

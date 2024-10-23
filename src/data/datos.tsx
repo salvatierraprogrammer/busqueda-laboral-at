@@ -11,7 +11,7 @@ export const datos = [
             "nombre": "ALKI",
             "pago": "mes vencido",
             "parciales": "paga plus contando con títulos",
-            "contacto": "salvatierraprogrammer@gmail.com"
+            "contacto": "profesionales@centroalki.com.ar"
           },
           {
             "nombre": "ATAÑER/PASIL",

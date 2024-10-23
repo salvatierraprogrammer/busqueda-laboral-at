@@ -27,7 +27,7 @@ function CardRecomendado({ datos }) {
       window.location.href = `mailto:${email}`; // Abre el cliente de correo con la dirección proporcionada
     } else {
       alert('Debes iniciar sesión para enviar un email.');
-      handleOpenLogin();
+      
     }
   };
 

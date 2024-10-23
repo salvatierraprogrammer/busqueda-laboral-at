@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { Box, Button, TextField, Typography, Alert } from '@mui/material';
+import { Box, Button, TextField, Typography, Alert, Checkbox, FormControlLabel, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import { auth, db } from '@config/Firebase'; // Asegúrate de que la ruta sea correcta
 import { doc, setDoc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import logo from '../../public/logo2.png';
+import TerminosYCondiciones from '../component/TerminosYCondiciones';
 
 interface CrearCuentaProps {
   handleClose: () => void;
-  handleOpenLogin: () => void;  // Nueva prop para abrir el modal de Login
+  handleOpenLogin: () => void; // Nueva prop para abrir el modal de Login
 }
 
 const CrearCuenta: React.FC<CrearCuentaProps> = ({ handleClose, handleOpenLogin }) => {
@@ -16,6 +18,8 @@ const CrearCuenta: React.FC<CrearCuentaProps> = ({ handleClose, handleOpenLogin 
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false); // Estado para manejar el éxito
+  const [acceptTerms, setAcceptTerms] = useState<boolean>(false); // Estado para manejar los términos
+  const [termsOpen, setTermsOpen] = useState<boolean>(false); // Estado para mostrar los términos
 
   const handleRegister = async () => {
     setError(null); // Resetear error al iniciar el registro
@@ -31,6 +35,10 @@ const CrearCuenta: React.FC<CrearCuentaProps> = ({ handleClose, handleOpenLogin 
       return setError('Ingresa un correo electrónico válido.');
     }
 
+    if (!acceptTerms) {
+      return setError('Debes aceptar los términos y condiciones.');
+    }
+
     try {
       // Crear el usuario en Firebase Authentication
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -43,7 +51,7 @@ const CrearCuenta: React.FC<CrearCuentaProps> = ({ handleClose, handleOpenLogin 
         email,
         photo: 'https://example.com/photo.png', // Cambia esto por una URL válida o por una lógica para obtener una foto
         estado: 'activo',
-        rol: 'at'
+        rol: 'at',
       });
 
       // Indicar que la cuenta fue creada exitosamente
@@ -62,51 +70,114 @@ const CrearCuenta: React.FC<CrearCuentaProps> = ({ handleClose, handleOpenLogin 
 
   return (
     <Box sx={{ padding: 2 }}>
-      <Typography variant="h6">Crear Cuenta</Typography>
+      <Typography variant="h6" >Crear Cuenta</Typography>
       {error && <Alert severity="error">{error}</Alert>}
       {success && <Alert severity="success">Cuenta creada con éxito. Abriendo login...</Alert>}
       {!success && (
-        <>
-          <TextField
-            label="Nombre Completo"
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
-          />
-          <TextField
-            label="Correo Electrónico"
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <TextField
-            label="Contraseña"
-            type="password"
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <TextField
-            label="Confirmar Contraseña"
-            type="password"
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-          <Button variant="contained" color="primary" fullWidth onClick={handleRegister}>
-            Crear Cuenta
-          </Button>
-        </>
+       <>
+       <TextField
+         label="Nombre Completo"
+         fullWidth
+         margin="normal"
+         variant="outlined"
+         value={nombre}
+         onChange={(e) => setNombre(e.target.value)}
+         InputProps={{
+           style: { backgroundColor: '#fff', color: '#000' }  // Fondo blanco y texto negro
+         }}
+         InputLabelProps={{
+           style: { color: '#ccc' }  // Color del label claro para buen contraste
+         }}
+       />
+       <TextField
+         label="Correo Electrónico"
+         fullWidth
+         margin="normal"
+         variant="outlined"
+         type="email"
+         value={email}
+         onChange={(e) => setEmail(e.target.value)}
+         InputProps={{
+           style: { backgroundColor: '#fff', color: '#000' } // Fondo blanco y texto negro
+         }}
+         InputLabelProps={{
+           style: { color: '#ccc' }  // Color del label claro
+         }}
+       />
+       <TextField
+         label="Contraseña"
+         type="password"
+         fullWidth
+         margin="normal"
+         variant="outlined"
+         value={password}
+         onChange={(e) => setPassword(e.target.value)}
+         InputProps={{
+           style: { backgroundColor: '#fff', color: '#000' } // Fondo blanco y texto negro
+         }}
+         InputLabelProps={{
+           style: { color: '#ccc' }  // Color del label claro
+         }}
+       />
+       <TextField
+         label="Confirmar Contraseña"
+         type="password"
+         fullWidth
+         margin="normal"
+         variant="outlined"
+         value={confirmPassword}
+         onChange={(e) => setConfirmPassword(e.target.value)}
+         InputProps={{
+           style: { backgroundColor: '#fff', color: '#000' } // Fondo blanco y texto negro
+         }}
+         InputLabelProps={{
+           style: { color: '#00000' }  // Color del label claro
+         }}
+       />
+ 
+       {/* Checkbox de Términos y Condiciones */}
+       <FormControlLabel
+         control={
+           <Checkbox
+             checked={acceptTerms}
+             onChange={(e) => setAcceptTerms(e.target.checked)}
+             color="primary"
+           />
+         }
+         label={
+           <Typography sx={{ color: '#fff' }}> {/* Texto blanco */}
+             Acepto los{' '}
+             <Button onClick={() => setTermsOpen(true)} color="secondary">
+               Términos y Condiciones
+             </Button>
+           </Typography>
+         }
+       />
+ 
+       <Button
+         variant="contained"
+         sx={{ backgroundColor: '#1976d2', color: '#fff', '&:hover': { backgroundColor: '#1565c0' } }}  // Botón azul con texto blanco y hover
+         fullWidth
+         onClick={handleRegister}
+         disabled={!acceptTerms}
+       >
+         Crear Cuenta
+       </Button>
+     </>
       )}
+
+      {/* Modal de Términos y Condiciones */}
+      <Dialog open={termsOpen} onClose={() => setTermsOpen(false)} maxWidth="sm" fullWidth>
+        <DialogTitle>Términos y Condiciones</DialogTitle>
+        <DialogContent sx={{ maxHeight: '60vh', overflowY: 'auto' }}>
+          <Typography variant="body2">
+            <TerminosYCondiciones />
+          </Typography>
+          <Button onClick={() => setTermsOpen(false)} color="primary" fullWidth>
+            Cerrar
+          </Button>
+        </DialogContent>
+      </Dialog>
     </Box>
   );
 };

@@ -9,31 +9,34 @@ function Login({ handleClose, handleOpenCrearCuenta, setIsAuthenticated }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [successMessage, setSuccessMessage] = useState(''); // Nuevo estado para el mensaje de éxito
+  const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
     setError(null);
-    setSuccessMessage(''); // Reiniciar el mensaje de éxito al intentar iniciar sesión
+    setSuccessMessage('');
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Guarda el ID y el rol del usuario si lo necesitas
       localStorage.setItem('userId', user.uid);
-      // Aquí podrías agregar lógica para almacenar el rol del usuario.
-
-      setIsAuthenticated(true); // Actualiza el estado de autenticación
-      setSuccessMessage('Inicio de sesión correctamente'); // Establecer el mensaje de éxito
-      handleClose(); // Cierra el modal
-      navigate('/'); // Redirige a la página de inicio
+      setIsAuthenticated(true);
+      setSuccessMessage('Inicio de sesión correctamente');
+      handleClose();
+      navigate('/');
     } catch (error) {
-      setError(error.message); // Muestra el mensaje de error
+      if (error.code === 'auth/user-not-found') {
+        setError('Cuenta no registrada. Verifica tu correo.');
+      } else if (error.code === 'auth/wrong-password') {
+        setError('Usuario o contraseña no coinciden. Vuelve a intentarlo.');
+      } else {
+        setError('Error al iniciar sesión. Inténtalo de nuevo.');
+      }
     } finally {
-      setLoading(false); // Finaliza el estado de carga
+      setLoading(false);
     }
   };
 
@@ -41,11 +44,10 @@ function Login({ handleClose, handleOpenCrearCuenta, setIsAuthenticated }) {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setIsAuthenticated(true);
-        navigate('/'); // Redirige si el usuario ya está autenticado
+        navigate('/');
       }
     });
-
-    return () => unsubscribe(); // Limpia la suscripción
+    return () => unsubscribe();
   }, [navigate, setIsAuthenticated]);
 
   return (
@@ -59,6 +61,8 @@ function Login({ handleClose, handleOpenCrearCuenta, setIsAuthenticated }) {
           variant="outlined"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          InputProps={{ style: { backgroundColor: '#fff', color: '#000' } }}
+          InputLabelProps={{ style: { color: '#000' } }}
         />
         <TextField
           label="Contraseña"
@@ -68,18 +72,14 @@ function Login({ handleClose, handleOpenCrearCuenta, setIsAuthenticated }) {
           variant="outlined"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          InputProps={{ style: { backgroundColor: '#fff', color: '#000' } }}
+          InputLabelProps={{ style: { color: '#000' } }}
         />
-        <Button 
-          type="submit" 
-          variant="contained" 
-          color="primary" 
-          fullWidth 
-          disabled={loading}
-        >
+        <Button type="submit" variant="contained" color="primary" fullWidth disabled={loading}>
           {loading ? <CircularProgress size={24} /> : 'Iniciar Sesión'}
         </Button>
         {error && <Typography color="error" variant="body2" sx={{ marginTop: 2 }}>{error}</Typography>}
-        {successMessage && <Typography color="success" variant="body2" sx={{ marginTop: 2 }}>{successMessage}</Typography>} {/* Mensaje de éxito */}
+        {successMessage && <Typography color="success" variant="body2" sx={{ marginTop: 2 }}>{successMessage}</Typography>}
         <Typography variant="body2" sx={{ marginTop: 2, color: 'white' }}>
           ¿No tienes cuenta?{' '}
           <Button color="secondary" onClick={handleOpenCrearCuenta}>

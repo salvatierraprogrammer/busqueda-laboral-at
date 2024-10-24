@@ -165,9 +165,14 @@ export const datos = [
               "motivo": "descuentan 7mil o pagan a 60 días"
             },
             {
-              "nombre": "ADIP",
-              "motivo": "domicilio paga 500$ la hora"
+              "nombre": "Equipo ADIP",
+              "motivo": "¿?  integración escolar y paga a mes vencido."
             },
+             {
+              "nombre": "Arco Iris",
+              "motivo": "¿?  paga a 60 días"
+            },
+           
             {
               "nombre": "ADDEI",
               "motivo": "paga de menos en los parciales"

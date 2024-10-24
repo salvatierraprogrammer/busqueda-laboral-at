@@ -27,12 +27,11 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  /* Quitar display: flex y place-items para evitar problemas de alineación */
   min-width: 320px;
   min-height: 100vh;
-  background-color: inherit; /* Se hereda el color de fondo del root */
-  color: inherit; /* Se hereda el color del root */
+  background-color: inherit;
+  color: inherit;
 }
 
 h1 {

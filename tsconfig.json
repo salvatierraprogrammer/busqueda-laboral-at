@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "paths": {
-      "@component/*": ["src/component/*"],
-      "@layout/*": ["src/layout/*"],
-      "@auth/*": ["src/auth/*"],
-      "@config/*": ["src/config/*"]
+      "@component/*": ["component/*"],
+      "@layout/*": ["layout/*"],
+      "@auth/*": ["auth/*"],
+      "@config/*": ["config/*"]
     }
   },
-  "files": [],
+  "include": ["src"],
+ // Ensure that the src folder is included for TypeScript compilation
+  "files": [], 
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }

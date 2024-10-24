@@ -6,11 +6,14 @@ import { modalStyle } from '../assets/css/ModalStyle';
 import { auth } from '@config/Firebase'; // Asegúrate de que la ruta es correcta
 import { onAuthStateChanged } from "firebase/auth";
 
-function CardRecomendado({ datos }) {
+interface CardRecomendadoProps {
+  datos: Centro[];
+}
+
+const CardRecomendado: React.FC<CardRecomendadoProps> = ({ datos }) => {
   const [openLogin, setOpenLogin] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false); // Estado de autenticación
 
-  const handleOpenLogin = () => setOpenLogin(true);
   const handleCloseLogin = () => setOpenLogin(false);
 
   // Verifica el estado de autenticación
@@ -22,12 +25,11 @@ function CardRecomendado({ datos }) {
     return () => unsubscribe(); // Limpia el suscriptor al desmontar el componente
   }, []);
 
-  const handleSendEmail = (email) => {
+  const handleSendEmail = (email: string) => {
     if (isAuthenticated) {
       window.location.href = `mailto:${email}`; // Abre el cliente de correo con la dirección proporcionada
     } else {
       alert('Debes iniciar sesión para enviar un email.');
-      
     }
   };
 
@@ -57,11 +59,11 @@ function CardRecomendado({ datos }) {
                   Detalles: {centro.detalles}
                 </Typography>
               )}
-              {centro.contacto && ( // Asegúrate de que centro.contacto contenga el email
+              {centro.contacto && (
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={() => handleSendEmail(centro.contacto)}
+                  onClick={() => handleSendEmail(centro.contacto!)}
                   sx={{ marginTop: 2 }}
                 >
                   Enviar Email
@@ -80,6 +82,6 @@ function CardRecomendado({ datos }) {
       </Modal>
     </Grid>
   );
-}
+};
 
 export default CardRecomendado;

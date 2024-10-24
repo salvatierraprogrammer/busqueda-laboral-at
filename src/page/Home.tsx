@@ -112,7 +112,7 @@ function Home() {
 
             <Box sx={{ marginTop: 5 }}>
                 <Typography variant="h6" gutterBottom>
-                    Centros No Recomendados
+                    Centros recomendados
                 </Typography>
                 <CardNoRecomendado datos={filteredNoRecomendados} />
             </Box>

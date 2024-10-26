@@ -110,7 +110,7 @@ const Banner: React.FC<BannerProps> = ({ banners }) => {
                 }
               }}
             >
-              Enviar CV
+             Mas Informacion
             </Button>
           </Box>
         </Box>

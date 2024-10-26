@@ -8,7 +8,7 @@ function CardNoRecomendado({ datos }) {
         <Grid container spacing={2}>
             {datos.length === 0 ? (
                 <Typography variant="h6" color="textSecondary" style={{ width: '100%', textAlign: 'center' }}>
-                    No hay centros no recomendados.
+                     Recomendados.
                 </Typography>
             ) : (
                 datos.map((centro) => (

@@ -38,10 +38,51 @@ function Home() {
   const filteredNoRecomendados = centros_no_recomendados.filter((centro) =>
     centro.nombre.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
+  
   return (
     <Box sx={{ backgroundColor: '#f7faf9', minHeight: '100vh' }}>
-      <Container maxWidth="lg" sx={{ pt: { xs: 10, sm: 12 }, pb: 8, px: { xs: 2, sm: 3 } }}>
+      <Container maxWidth="lg" sx={{ pt: { xs: 10, sm: 12 }, pb: 8, px: { xs: 2, sm: 3 } }}>=======
+    // Datos de los flyers
+    const flyers = [
+        
+        
+        {
+            imageUrl: 'https://scontent.ffdo24-3.fna.fbcdn.net/v/t39.30808-6/330485135_3503540719868003_3452934922243546914_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeH0_SD33XjJTp1shHlNRwH01x4jNl1nBNTXHiM2XWcE1AjyPC6afuvIBNybIuVplYDlNcNHWXCLOuzzvpUz7usQ&_nc_ohc=XDcLU6PD5dQQ7kNvgHs8DNA&_nc_ht=scontent.ffdo24-3.fna&_nc_gid=Awd1I_NHuvGrmrUWEfpn-BQ&oh=00_AYCTqM34BKR4Hvt8AMzTz5BIniitDCfoXULXaiLHhEquUw&oe=671F7D99',
+             link: "https://www.centrapsi.com/",
+            email: 'cvs@miradahumana.com.ar',
+             title: "Centra Psi",
+            description: "Centra Psi diseña equipos de acompañantes terapéuticos de acuerdo a las características del paciente. Nos encargamos de la coordinación y el seguimiento del caso, como así también de la supervisión de los acompañantes. Trabajamos con prepagas, obras sociales o en forma particular."
+         },
+         {
+           imageUrl: 'https://scontent.faep24-1.fna.fbcdn.net/v/t39.30808-6/456826200_2266234960385354_162341962218145390_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEGNS9JIiWB5ZW4g-NHVjCwxuC5PdLBnKfG4Lk90sGcp-JqNeM4lkexhMG-P4y4su2BK3PPwhLSy25iKSo6OIoG&_nc_ohc=4ss_p9TYi7YQ7kNvgHGUfg4&_nc_ht=scontent.faep24-1.fna&_nc_gid=A_u0_xEJM9ccICl-syBqonp&oh=00_AYD02vv4hgxjexxlpmc8OG7X_CEjV-lQsMGTTsE89ujysA&oe=671F8E47',
+          email: 'cvs@miradahumana.com.ar',
+          link: "https://miradahumana.com.ar/",
+          title: "Mirada Humana",
+         description: `Si sos Acompañante Terapéutico, profesional y/o relacionado a la salud mental, 
+          podés sumarte a nuestro equipo! 🙌👉 
+      
+           Requisitos: 
+         ✔️ Monotributo al día o posibilidad de tramitarlo.
+           ✔️ Seguros de Responsabilidad Civil y de Accidentes Personales.
+           ✔️ Reuniones de supervisión mensuales (actualmente modalidad virtual).
+      
+           Interesados o para más información, enviar CV o consulta a: 
+          cvs@miradahumana.com.ar
+      
+          Muchas gracias,
+           Equipo Mirada Humana- AT`
+         },
+         {
+             "imageUrl": "https://scontent.faep24-2.fna.fbcdn.net/v/t39.30808-6/439319511_2099353760449901_2845244578568097042_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeH0xsBHVfKmnxrCKeuloZkg1fSrFyeGdXzV9KsXJ4Z1fDWNDleveuaLQ_suupsI0HgXMBmUp-ysLLmAbx0Y6tJx&_nc_ohc=0bVDcqmi2OAQ7kNvgFQEHC-&_nc_ht=scontent.faep24-2.fna&_nc_gid=AMn7s66Y4QfK4jNPy8fNr8g&oh=00_AYAAzQcGcjdIxany-y98Z6wg8B6hnxUnkNQHA1rzJhtORg&oe=671FA031",
+             "email": "cvs@miradahumana.com.ar",
+             "link": "https://desirsalud.com.ar/busqueda-laboral/",
+             "title": "Decir Salud",
+             "description": "Conecta con pacientes en busca de apoyo emocional. Ofrecemos oportunidades para terapeutas apasionados."
+         }
+       
+      
+    ];
+
 
         {/* Hero */}
         <Box

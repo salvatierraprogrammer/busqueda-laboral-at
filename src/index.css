@@ -1,74 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+
 :root {
-  /* Fuente y estilo general */
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Avenir', 'Helvetica', 'Arial', sans-serif;
-  line-height: 1.5;
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
   font-weight: 400;
 
-  /* Tema oscuro por defecto */
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87); /* Color de texto claro */
-  background-color: #242424; /* Fondo oscuro */
+  color-scheme: light;
+  color: #1a2e2a;
+  background-color: #f7faf9;
 
-  /* Optimización de texto */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 a {
   font-weight: 500;
-  color: #646cff; /* Color de enlace por defecto */
-  text-decoration: none; /* Hereda la decoración de enlaces */
+  color: #0f6e56;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
+
 a:hover {
-  color: #535bf2; /* Cambio de color al hacer hover */
+  color: #085041;
 }
 
 body {
   margin: 0;
-  /* Quitar display: flex y place-items para evitar problemas de alineación */
   min-width: 320px;
   min-height: 100vh;
-  background-color: inherit;
-  color: inherit;
+  background-color: #f7faf9;
+  color: #1a2e2a;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 2.4em;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #112420;
 }
 
+h2 {
+  font-size: 1.8em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #112420;
+}
+
+h3 {
+  font-size: 1.3em;
+  font-weight: 600;
+  color: #112420;
+}
+
+/* Sobrescribir estilos globales de botón para no interferir con MUI */
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a; /* Fondo de botón oscuro */
-  color: #ffffff; /* Color de texto blanco */
-  cursor: pointer;
-  transition: border-color 0.25s, background-color 0.25s;
-}
-button:hover {
-  border-color: #646cff; /* Color de borde al hacer hover */
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color; /* Contorno accesible al enfocar */
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547; /* Texto oscuro en modo claro */
-    background-color: #ffffff; /* Fondo claro en modo claro */
-  }
-  a:hover {
-    color: #747bff; /* Cambio de color de enlace al hacer hover en modo claro */
-  }
-  button {
-    background-color: #f9f9f9; /* Fondo claro para botones en modo claro */
-    color: #000000; /* Texto oscuro para los botones en modo claro */
-  }
+/* Scrollbar personalizada — verde sutil */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f4f3;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(15, 110, 86, 0.25);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 110, 86, 0.45);
+}
+
+/* Selección de texto */
+::selection {
+  background: rgba(15, 110, 86, 0.15);
+  color: #0f6e56;
+}
+
+/* Focus visible accesible */
+:focus-visible {
+  outline: 2px solid #7ecfb3;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Remover outline por defecto en clics */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Imágenes responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Root de React */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }

@@ -5,6 +5,8 @@ import Footer from '@layout/Footer';
 import Home from './page/Home';
 import { auth } from '@config/Firebase';
 import Login from '@auth/Login';
+import Admin from './page/Admin';
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false); // Estado para manejar autenticación
@@ -25,6 +27,10 @@ function App() {
           path="/login" 
           element={<Login setIsAuthenticated={setIsAuthenticated} />} 
         />
+        <Route 
+          path="/admin" 
+          element={ <Admin />} />
+       
       </Routes>
       <Footer/>
     </Router>

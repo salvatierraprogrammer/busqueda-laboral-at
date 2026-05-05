@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { collection, getDocs } from 'firebase/firestore'; 
-import { db } from '@config/Firebase';
+import { db } from '../config/Firebase';
 
 export const ecApi = createApi({
   reducerPath: "ecApi",
@@ -8,7 +8,6 @@ export const ecApi = createApi({
     return { data: args };
   },
   endpoints: (builder) => ({
-    // Endpoint para obtener documentos desde una colección de Firestore
     getUsuarios: builder.query({
       async queryFn() {
         try {
@@ -21,12 +20,11 @@ export const ecApi = createApi({
         } catch (error) {
           return { error: error.message };
         }
-      }
+      },
     }),
   }),
 });
 
-// Exportamos los hooks generados por createApi para cada endpoint
-export const {
-  useGetUsuarios,
-} = ecApi;
+
+// Hook correcto
+export const { useGetUsuariosQuery } = ecApi;
